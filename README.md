@@ -57,5 +57,5 @@ else CMake will install **Raylib** again.
 - Make the window more **flexible and resizable**.
 
 ---
-📌 **Created by ArcShahi**
+📌 **ArcShahi**
 
