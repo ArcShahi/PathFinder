@@ -2,6 +2,12 @@
 
 A visualization of **Dijkstra's Algorithm** and **A* (A-Star) Algorithm** for pathfinding.
 
+
+<img src=![image](https://github.com/user-attachments/assets/4b21abbc-6d07-4e83-afc6-26cdec03ea9d)
+ width="300" height="200" alt="Description">
+
+
+
 ## How to Build
 
 You'll need **CMake** installed on your system.
