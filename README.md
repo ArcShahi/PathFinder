@@ -4,7 +4,7 @@ A visualization of **Dijkstra's Algorithm** and **A* (A-Star) Algorithm** for pa
 
 
 
-<img src="https://github.com/user-attachments/assets/4b21abbc-6d07-4e83-afc6-26cdec03ea9d" width="400" height="250" alt="Image 1">      <img src="https://github.com/user-attachments/assets/4cc3def2-7658-4e9d-803a-281c1edae046" width="400" height="250" alt="Img 2">                                            
+<img src="https://github.com/user-attachments/assets/4b21abbc-6d07-4e83-afc6-26cdec03ea9d" width="450" height="250" alt="Image 1">      <img src="https://github.com/user-attachments/assets/4cc3def2-7658-4e9d-803a-281c1edae046" width="450" height="250" alt="Img 2">                                            
 
 
 ## USAGE
