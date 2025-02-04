@@ -9,9 +9,10 @@ A visualization of **Dijkstra's Algorithm** and **A* (A-Star) Algorithm** for pa
 
 ## USAGE
 1.Left Mouse Click to Set Starting Point
+
 2.Again to set Ending Point
 
-3.Drag mouse while holding left click
+3.Drag mouse while holding left click to place walls
 
 4.Press 'SPACE' to Find Path
 
