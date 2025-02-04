@@ -44,9 +44,6 @@ namespace na
 		Color get_visited_color(int visit_order) const;
 		path_stats find_path(grid& grid, cell* start, cell* end, bool use_a_star);
 
-
-		float accum_time{ 0.0f };
-		const float UPDATE_INTERVAL = 1.0f / 60.f;
 	};
 }
 

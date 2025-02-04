@@ -85,7 +85,7 @@ namespace na
                     dijkstra_stats = find_path(dijkstra_grid, start_cell_dijkstra, end_cell_dijkstra,
                          false);
 
-                    accum_time -= 1.0f;
+                   
                
           }
 
@@ -110,7 +110,7 @@ namespace na
      {
           DrawLine(screen_width / 2, 0, screen_width / 2, screen_height, WHITE);
 
-          // Render Lamda
+          // Render Lambda
           auto draw_grid = [this](const grid& grid, int offset_x) 
                {
                for (int y = 0; y < grid_rows; y++) {
@@ -125,7 +125,7 @@ namespace na
                          Color cell_color;
                          switch (grid[y][x].type) {
                          case cell_type::WALL:
-                              cell_color = { 100, 100, 100, 255 };
+                              cell_color = { 120, 120, 120, 255 };
                               break;
                          case cell_type::START:
                               cell_color = GREEN;
