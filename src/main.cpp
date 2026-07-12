@@ -1,10 +1,9 @@
 
-#include "visualizer.hpp"
+#include <App.hpp>
 
 
 int main()
 {
-
-	na::visualizer visualizer;
-	visualizer.run();
+	App app;
+	app.Run();
 }

@@ -9,17 +9,22 @@ add_executable(pathfinder)
 
 target_sources(pathfinder
         PRIVATE 
-        src/main.cpp
-        src/pathfinder.cpp
-        src/visualizer.cpp 
+        src/main.cpp   
+        src/App.cpp
+        src/MainMenu.cpp
 
         PRIVATE 
           FILE_SET HEADERS 
-          BASE_DIRS src 
+          BASE_DIRS include 
              FILES
-               src/cell.hpp
-               src/pathfinder.hpp
-               src/visualizer.hpp 
+               include/Cell.hpp
+               include/PathFinder.hpp
+               include/App.hpp
+               include/Grid.hpp
+               include/Renderer.hpp
+               include/Astar.hpp
+               include/Scene.hpp
+               include/MainMenu.hpp
 )
 if(WIN32)
     target_sources(pathfinder PRIVATE icon.rc)
