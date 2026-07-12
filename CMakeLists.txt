@@ -23,8 +23,9 @@ target_sources(pathfinder
                include/Grid.hpp
                include/Renderer.hpp
                include/Astar.hpp
-               include/Scene.hpp
+               include/State.hpp
                include/MainMenu.hpp
+               include/Star.hpp
 )
 if(WIN32)
     target_sources(pathfinder PRIVATE icon.rc)

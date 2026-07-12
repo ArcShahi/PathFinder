@@ -2,7 +2,7 @@
 #define APP_HPP
 
 #include <memory>
-#include <scene.hpp>
+#include <State.hpp>
 
 
 class App
@@ -20,7 +20,7 @@ private:
 	void Render();
 
 private:
-	std::unique_ptr<Scene> m_CurrentScene{};
+	std::unique_ptr<State> m_CurrentState{};
 };
 
 

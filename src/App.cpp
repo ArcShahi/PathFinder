@@ -10,8 +10,8 @@ App::App()
 
 	rlImGuiSetup(true);
 
-	m_CurrentScene = std::make_unique<MainMenu>();
-	m_CurrentScene->OnEnter();
+	m_CurrentState = std::make_unique<MainMenu>();
+	m_CurrentState->OnEnter();
 }
 
 App::~App()
@@ -32,20 +32,18 @@ void App::Run()
 
 void App::Update()
 {
-	m_CurrentScene->Update();
+	m_CurrentState->Update();
 }
 
 void App::Render()
 {
 	BeginDrawing();
-	ClearBackground(RAYWHITE);
-	rlImGuiBegin();
+	ClearBackground(BLACK);
 
 
-	m_CurrentScene->Render();
+	m_CurrentState->Render();
 
 
 
-	rlImGuiEnd();
 	EndDrawing();
 }
