@@ -1,38 +1,33 @@
-#ifndef SCENE_HPP
-#define SCENE_HPP
+#pragma once
+
+#include <memory>
+
 
 enum class StateID
 {
-	None,
 	MainMenu,
-	Pathfinder,
-	Versus,
-	Exit
-};
-
-enum class  Algorithms
-{
 	AStar,
 	Dijkstra,
-	Versus
+	Versus,
+	None
 };
+
+class StateMachine; // fwd declaration only, for preventing ciculation dependency
 
 class State
 {
 public:
-	virtual ~State() = default;
-
-	virtual void OnEnter() {}
-	virtual void OnExit() {}
-
-	virtual void Update() = 0;
-	virtual void Render() = 0;
-
-	StateID NextState()const { return m_NextState; }
-	Algorithms Algorithm()const { return m_RunningAlgo; }
+	using Ptr = std::unique_ptr<State>;
+	explicit State(StateMachine& machine)
+		:m_Machine{machine}
+	{}
+	virtual ~State()=default;
+	virtual void HandleInput() = 0;
+	virtual void Update(float dt) = 0;
+	virtual void Draw() = 0;
 
 protected:
-	StateID m_NextState{ StateID::None };
-	Algorithms m_RunningAlgo{ Algorithms::AStar };
+	void RequestChange(StateID id);
+private:
+	StateMachine& m_Machine;
 };
-#endif // !SCENE_HPP

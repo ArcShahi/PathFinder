@@ -1,7 +1,7 @@
 #ifndef PATHFINDER_HPP
 #define PATHFINDER_HPP
 
-class PathFinder
+class IPathFinder
 {
 public:
 	virtual ~PathFinder()=default;

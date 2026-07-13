@@ -9,23 +9,22 @@ add_executable(pathfinder)
 
 target_sources(pathfinder
         PRIVATE 
-        src/main.cpp   
         src/App.cpp
-        src/MainMenu.cpp
+        src/State.cpp
+        src/MenuState.cpp
+        src/VisualizeState.cpp
+        src/VersusState.cpp
 
         PRIVATE 
           FILE_SET HEADERS 
           BASE_DIRS include 
              FILES
-               include/Cell.hpp
-               include/PathFinder.hpp
-               include/App.hpp
-               include/Grid.hpp
-               include/Renderer.hpp
-               include/Astar.hpp
                include/State.hpp
-               include/MainMenu.hpp
-               include/Star.hpp
+               include/StateMachine.hpp
+               include/MenuState.hpp
+               include/VisualizeState.hpp
+               include/VersusState.hpp
+
 )
 if(WIN32)
     target_sources(pathfinder PRIVATE icon.rc)
@@ -36,9 +35,8 @@ add_subdirectory(vendor/rlImGui)
 
 
 target_compile_features(pathfinder PRIVATE cxx_std_23)
-# Enable Multiprocessor compilation for MSVC only and AVX2 , FMA for all
+# Enable Multiprocessor compilation for MSVC 
 target_compile_options(pathfinder PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/MP>)
-
 
 # Link libraries
 target_link_libraries(pathfinder PRIVATE raylib imgui rlimgui)

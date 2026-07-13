@@ -19,6 +19,5 @@ Renderer::Renderer()
 void Renderer::Draw(const Grid & grid)
 {}
 
-Renderer::~Renderer()
-{}
+
 #endif // !RENDERER_HPP

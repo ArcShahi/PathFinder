@@ -1,0 +1,27 @@
+#include <MenuState.hpp>
+#include <raylib.h>
+
+
+void MenuState::HandleInput()
+{
+     if (IsKeyPressed(KEY_DOWN)) m_Selected = (m_Selected + 1) % 3;
+     if (IsKeyPressed(KEY_UP))   m_Selected = (m_Selected + 2) % 3;
+
+     if (IsKeyPressed(KEY_ENTER)) {
+          switch (m_Selected) {
+          case 0: RequestChange(StateID::AStar);    break;
+          case 1: RequestChange(StateID::Dijkstra); break;
+          case 2: RequestChange(StateID::Versus);            break;
+          }
+     }
+}
+
+
+void MenuState::Draw() {
+     const char* options[3] = { "A*", "Dijkstra", "Versus" };
+     for (int i = 0; i < 3; ++i) {
+          Color c = (i == m_Selected) ? YELLOW : WHITE;
+          DrawText(options[i], 100, 100 + i * 40, 30, c);
+     }
+     DrawText("UP/DOWN to select, ENTER to confirm", 100, 250, 18, GRAY);
+}
