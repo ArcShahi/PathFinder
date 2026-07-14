@@ -39,7 +39,7 @@ void VisualizeState::HandleInput()
 		return;
 	}
 
-	// once running, editing the maze mid-search doesn't make sense — ignore clicks
+	
 }
 void VisualizeState::Update(float dt)
 {
@@ -69,11 +69,6 @@ void VisualizeState::Draw() {
 	const auto* path = (m_Started && m_Stats.finished && m_Stats.found) ?
 		&m_Solver->GetPath() : nullptr;
 	m_Grid.Draw(bounds, m_Colors, visited, path);
-
-	if (!m_Started) {
-		DrawText("Left-click drag: Wall | Right-click drag: Erase| S+right-click: start | E+right-click: end | SPACE: run",
-			10, GetScreenHeight() - 30, 16, BLACK);
-	}
 
 	rlImGuiBegin();
 	const char* label = (m_Algo == Algo::Astar) ? "A* Controls" : "Dijkstra Controls";

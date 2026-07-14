@@ -127,11 +127,6 @@ void VersusState::Draw() {
 
 	DrawLine(GetScreenWidth() / 2, 0, GetScreenWidth() / 2, GetScreenHeight(), GRAY);
 
-	if (!m_Started) {
-		DrawText("Left-drag: wall | Right-drag: erase | S+click: start | E+click: end | SPACE: run",
-			10, GetScreenHeight() - 30, 16, GRAY);
-	}
-
 	rlImGuiBegin();
 	DrawVizPanel(m_Settings, m_StatsA, m_ColorsA, m_StatsB, m_ColorsB);
 	rlImGuiEnd();
