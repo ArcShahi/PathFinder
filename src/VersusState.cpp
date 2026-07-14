@@ -8,8 +8,9 @@
 
 
 VersusState::VersusState(StateMachine& machine)
-	:State(machine), m_Grid(GetScreenWidth()  / 2/25, GetScreenHeight() / 25)
+	:State(machine), m_Grid(GetScreenWidth()/2, GetScreenHeight())
 {
+	
 	m_Grid.SetStart(0, 0);
 	m_Grid.SetEnd(m_Grid.Cols() - 1, m_Grid.Rows() - 1);
 }

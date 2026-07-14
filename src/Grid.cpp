@@ -12,7 +12,10 @@ Color LerpColor(Color a, Color b, float t)
 
 
 Grid::Grid(int cols, int rows)
-	: m_Cols(cols), m_Rows(rows), m_Cells(cols* rows, CellType::Empty) {}
+	: m_Cells(cols* rows, CellType::Empty) 
+{
+	ComputeGridDimension(cols, rows);
+}
 
 
 float Grid::CellSize(Rectangle& bound) const
@@ -90,5 +93,10 @@ void Grid::ClearWalls()
 	std::fill(m_Cells.begin(), m_Cells.end(), CellType::Empty);
 }
 
-
+void Grid::ComputeGridDimension(int width, int height)
+{
+	m_Cols = std::max(1, (width / m_Size));
+	m_Rows = std::max(1, (height / m_Size));
+	
+}
 

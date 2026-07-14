@@ -22,6 +22,7 @@ struct GridColors
 	Color visitedEnd = DARKBLUE;  // color of most-recently-visited cells
 };
 
+
 class Grid
 {
 public:
@@ -51,10 +52,14 @@ public:
 	Vector2 GetEnd()const { return m_End; }
 	int Cols() const { return m_Cols; }
 	int Rows() const { return m_Rows; }
+private:
+	void ComputeGridDimension(int width, int height);
+
 
 private:
 	std::vector<CellType> m_Cells{};
 	Vector2 m_Start{};
 	Vector2 m_End{};
 	int m_Cols{}, m_Rows{};
+	int m_Size{ 20 };
 };

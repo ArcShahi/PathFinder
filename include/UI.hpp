@@ -4,8 +4,9 @@
 #include <Grid.hpp> // for GridColors
 
 struct VizSettings {
+	float steps = 50.0f;
+	int cellSize = 20;
 	bool paused = false;
-	float steps = 30.0f;
 	bool resetRequested = false;
 	bool restartRequested = false;
 };

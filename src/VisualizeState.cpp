@@ -7,14 +7,17 @@
 
 
 VisualizeState::VisualizeState(StateMachine& machine, Algo algo)
-	: State(machine), m_Algo(algo), m_Grid(GetScreenWidth() / 25, GetScreenHeight() / 25)
+	: State(machine), m_Algo(algo), m_Grid(GetScreenWidth(), GetScreenHeight())
 {
+	
+
+	m_Grid.SetStart(0, 0);
+	m_Grid.SetEnd(m_Grid.Cols() - 1, m_Grid.Rows() - 1);
+
 	m_Solver = (algo == Algo::Astar) ?
 		std::unique_ptr<IPathFinder>(std::make_unique<AStar>()) :
 		std::unique_ptr<IPathFinder>(std::make_unique<Dijkstra>());
 
-	m_Grid.SetStart(0, 0);
-	m_Grid.SetEnd(m_Grid.Cols() - 1, m_Grid.Rows() - 1);
 
 }
 

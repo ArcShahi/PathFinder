@@ -19,7 +19,7 @@ public:
 
 public:
 	void Update(float dt);
-	void Render();
+	void Draw();
 
 private:
 	float Map(float value, float InMin, float InMax, float OutMin, float OutMax);
@@ -51,11 +51,11 @@ inline void Star::Update(float dt)
 
 	const float width = static_cast<float>(GetScreenWidth());
 
-	speed = Map(GetMousePosition().x+100,
+	speed = Map(GetMousePosition().x,
 		0.0f,
 		width,
-		10.0f,
-		1000.0f);
+		500.0f,
+		1500.0f);
 
 	z -= speed * dt;
 
@@ -65,7 +65,7 @@ inline void Star::Update(float dt)
 	}
 }
 
-inline void Star::Render()
+inline void Star::Draw()
 {
 
 	const auto Width = GetScreenWidth();
