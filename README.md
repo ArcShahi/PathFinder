@@ -1,67 +1,72 @@
-# Path Finder
+# Pathfinder
 
-A visualization of **Dijkstra's Algorithm** and **A* (A-Star) Algorithm** for pathfinding.
-
-
-
-<img src="https://github.com/user-attachments/assets/4b21abbc-6d07-4e83-afc6-26cdec03ea9d" width="450" height="250" alt="Image 1">      <img src="https://github.com/user-attachments/assets/4cc3def2-7658-4e9d-803a-281c1edae046" width="450" height="250" alt="Img 2">    
+A* , Dijkstra pathfinder alogrithm visualization written in C++ using `raylib`, `ImGui`.
 
 
+`VERSION 3.1`
 
-   ![A_ visualization - Made with Clipchamp](https://github.com/user-attachments/assets/000a7178-407b-4db7-b43f-25dd80c38b26)
-                                     
-
-
-## USAGE
-1.Left Mouse Click to Set Starting Point
-
-2.Again to set Ending Point
-
-3.Drag mouse while holding left click to place walls
-
-4.Press 'SPACE' to Find Path
-
-5.Press 'R' to Reset
+## Features
+- Visualize A* and Dijkstra 
+- Compare A* and Dijstra
+- ImGuI menu to control visuals and algorithm mechanics.
+- Menu also has info about : Nodes visisted, Time taken.
+- Abstract class to handle more pathfinder algorithms : BFS , DFS
 
 
-## How to Build
+## Gallery 
 
-You'll need **CMake** installed on your system.
+----
 
-```sh
-# Clone the repository
-git clone https://github.com/ArcShahi/PathFinder.git
-cd PathFinder
+![gif0](gallery/Showcase2.gif)
 
-# Create a build directory
-mkdir build && cd build
+----
 
-# Generate build files
-cmake ..
+![img1](gallery/img0.png)
 
-# Build the project (default build tools will be used)
-cmake --build .
+----
 
-# Find the executable in the Debug or Release directory
-./PathFinder.exe
+![img2](gallery/img1.png)
+
+
+----
+
+
+## Setup
+
+You need `raylib` on your system (use vcpkg or something)
+
+```powershell
+# 1. Clone the repo
+git clone <>
+
+
+# 2. Go inside directory and call cmake
+cmake -B out\
+
+# 3. Files will be build in 'out' directory
+# 4 Call your build systerm or : 
+cmake -build out --config release
+
 ```
 
-## ⚠️ Raylib Dependency
 
-This `CMakeLists.txt` is configured to find **raylib** using **vcpkg**. If you did **not** use vcpkg, update your `CMakeLists.txt` as follows:
+## Usage
 
-```cmake
-find_package(raylib 3.0 REQUIRED) # Requires at least version 3.0
-```
-else CMake will install **Raylib** again.
+- Left mouse click to place walls
+- Click at wall to erase it
+- S + LMB to place starting cell
+- E + LMB to place ending cell
+- Space to start the visualization
+- Other control options are on Imgui menu
+
+
+## AI Policy
+
+AI usage for code generation and documentation is forbidden for this project.
+
+> Shahi ( *prefers natural stupidity over artifical intelligence*)
 
 
 ## TODO
-- Optimize performance.
-- Implement a **slower visualization mode** to better observe the pathfinding process.
-- Improve the **color gradient** for visited paths.
-- Make the window more **flexible and resizable**.
-
----
-📌 **ArcShahi**
-
+- Minor renaming
+- Optimize heuristics for A*
