@@ -1,4 +1,5 @@
-#include "raylib.h"
+#include <raylib.h>
+#include <rlImGui.h>
 #include <StateMachine.hpp>
 #include <MenuState.hpp>
 #include <VersusState.hpp>
@@ -6,38 +7,37 @@
 
 
 int main() {
-     InitWindow(1000, 700, "PathFinder");
-     SetTargetFPS(60);
 
-     StateMachine machine;
-     machine.RegisterFactory(StateID::MainMenu, [&machine] {
-          return std::make_unique<MenuState>(machine);
-          });
-     machine.RegisterFactory(StateID::AStar, [&machine] {
-          return std::make_unique<VisualizeState>(machine, "A*");
-          });
-     machine.RegisterFactory(StateID::Dijkstra, [&machine] {
-          return std::make_unique<VisualizeState>(machine, "Dijkstra");
-          });
-     machine.RegisterFactory(StateID::Versus, [&machine] {
-          return std::make_unique<VersusState>(machine);
-          });
+	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	InitWindow(1280, 720, "PathFinder");
+	SetWindowMinSize(600, 400);
+	rlImGuiSetup(true);
 
-     machine.RequestChange(StateID::MainMenu);
-     machine.ApplyPendingChange();
+	StateMachine machine;
+	machine.RegisterFactory(StateID::MainMenu, [&machine] { return std::make_unique<MenuState>(machine); });
+	machine.RegisterFactory(StateID::AStar, [&machine] {
+		return std::make_unique<VisualizeState>(machine, Algo::Astar);
+		});
+	machine.RegisterFactory(StateID::Dijkstra, [&machine] {
+		return std::make_unique<VisualizeState>(machine, Algo::Dijkstra);
+		});
+	// ... Versus factory later
 
-     while (!WindowShouldClose()) {
-          float dt = GetFrameTime();
-          machine.HandleInput();
-          machine.Update(dt);
-          machine.ApplyPendingChange();
+	machine.RequestChange(StateID::MainMenu);
+	machine.ApplyPendingChange();
 
-          BeginDrawing();
-          ClearBackground(BLACK);
-          machine.Draw();
-          EndDrawing();
-     }
+	while (!WindowShouldClose()) {
+		float dt = GetFrameTime();
+		if (IsKeyPressed(KEY_F11)) ToggleBorderlessWindowed();
+		machine.HandleInput();
+		machine.Update(dt);
+		machine.ApplyPendingChange();
 
-     CloseWindow();
-     return 0;
+		BeginDrawing();
+		ClearBackground(BLACK);
+		machine.Draw();
+		EndDrawing();
+	}
+	rlImGuiShutdown();
+	CloseWindow();
 }

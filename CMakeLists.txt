@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.2)
 project(PathFinder 
-    VERSION 2.0
+    VERSION 3.0
     DESCRIPTION "PathFinder Application"
     LANGUAGES CXX
 )
@@ -14,6 +14,10 @@ target_sources(pathfinder
         src/MenuState.cpp
         src/VisualizeState.cpp
         src/VersusState.cpp
+        src/Grid.cpp
+        src/Astar.cpp
+        src/Dijkstra.cpp
+        src/UI.cpp
 
         PRIVATE 
           FILE_SET HEADERS 
@@ -24,7 +28,11 @@ target_sources(pathfinder
                include/MenuState.hpp
                include/VisualizeState.hpp
                include/VersusState.hpp
-
+               include/Grid.hpp
+               include/IPathfinder.hpp
+               include/Astar.hpp
+               include/Dijkstra.hpp
+               include/UI.hpp
 )
 if(WIN32)
     target_sources(pathfinder PRIVATE icon.rc)

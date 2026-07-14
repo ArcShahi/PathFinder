@@ -10,5 +10,7 @@ public:
 	void Draw() override;
 
 private:
+private:
 	int m_Selected{ 0 }; // 0 = A*, 1 = Dijkstra, 2 = Versus
 };
+
