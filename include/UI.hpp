@@ -5,7 +5,7 @@
 
 struct VizSettings {
 	bool paused = false;
-	float stepInterval = 0.02f;
+	float steps = 30.0f;
 	bool resetRequested = false;
 	bool restartRequested = false;
 };

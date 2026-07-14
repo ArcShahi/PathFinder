@@ -43,10 +43,11 @@ void VisualizeState::Update(float dt)
 	if (!m_Started) return;
 	if (m_Settings.paused || m_Stats.finished) return;
 
+	float stepInterval{ 1.0f / m_Settings.steps };
 	m_Accumulator += dt;
-	while (m_Accumulator >= m_Settings.stepInterval && !m_Stats.finished) {
+	while (m_Accumulator >= stepInterval && !m_Stats.finished) {
 		m_Stats.finished = m_Solver->Step();
-		m_Accumulator -= m_Settings.stepInterval;
+		m_Accumulator -= stepInterval;
 	}
 
 	m_Stats.elapsedTime += dt;

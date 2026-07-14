@@ -93,12 +93,12 @@ void VersusState::Update(float dt)
 {
 	if (!m_Started) return;
 	if (m_Settings.paused) return;
-
+	float stepInterval{ 1.0f / m_Settings.steps };
 	m_Accumulator += dt;
-	while (m_Accumulator >= m_Settings.stepInterval && !(m_StatsA.finished && m_StatsB.finished)) {
+	while (m_Accumulator >= stepInterval && !(m_StatsA.finished && m_StatsB.finished)) {
 		if (!m_StatsA.finished) m_StatsA.finished = m_Astar.Step();
 		if (!m_StatsB.finished) m_StatsB.finished = m_Dijkstra.Step();
-		m_Accumulator -= m_Settings.stepInterval;
+		m_Accumulator -= stepInterval;
 	}
 
 	if (!m_StatsA.finished) m_StatsA.elapsedTime += dt;
