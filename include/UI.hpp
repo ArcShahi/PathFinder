@@ -19,3 +19,4 @@ struct VizStats {
 };
 
 void DrawVizPanel(const char* label, VizSettings& settings, VizStats& stats, GridColors& colors);
+void DrawVizPanel(VizSettings& settings,VizStats& statsA, GridColors& colorsA,VizStats& statsB, GridColors& colorsB);

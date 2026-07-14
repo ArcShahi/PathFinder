@@ -13,6 +13,9 @@ VisualizeState::VisualizeState(StateMachine& machine, Algo algo)
 		std::unique_ptr<IPathFinder>(std::make_unique<AStar>()) :
 		std::unique_ptr<IPathFinder>(std::make_unique<Dijkstra>());
 
+	m_Grid.SetStart(0, 0);
+	m_Grid.SetEnd(m_Grid.Cols() - 1, m_Grid.Rows() - 1);
+
 }
 
 Rectangle GetBounds() {

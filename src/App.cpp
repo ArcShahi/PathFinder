@@ -21,7 +21,9 @@ int main() {
 	machine.RegisterFactory(StateID::Dijkstra, [&machine] {
 		return std::make_unique<VisualizeState>(machine, Algo::Dijkstra);
 		});
-	// ... Versus factory later
+	machine.RegisterFactory(StateID::Versus, [&machine] {
+		return std::make_unique<VersusState>(machine);
+		});
 
 	machine.RequestChange(StateID::MainMenu);
 	machine.ApplyPendingChange();
