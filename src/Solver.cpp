@@ -1,12 +1,11 @@
-#include <VisualizeState.hpp>
+#include <Solver.hpp>
 #include <raylib.h>
 #include <Astar.hpp>
 #include <rlImGui.h>
 #include <Dijkstra.hpp>
 #include <imgui.h>
-#include <Audio.hpp>
 
-VisualizeState::VisualizeState(StateMachine& machine, Algo algo)
+Solver::Solver(StateMachine& machine, Algo algo)
 	: State(machine), m_Algo(algo), m_Grid(GetScreenWidth(), GetScreenHeight())
 {
 	
@@ -25,7 +24,7 @@ Rectangle GetBounds() {
 	return { 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() };
 }
 
-void VisualizeState::HandleInput()
+void Solver::HandleInput()
 {
 	if (IsKeyPressed(KEY_BACKSPACE)) { RequestChange(StateID::MainMenu); return; }
 
@@ -41,7 +40,7 @@ void VisualizeState::HandleInput()
 
 	
 }
-void VisualizeState::Update(float dt)
+void Solver::Update(float dt)
 {
 	if (!m_Started) return;
 	if (m_Settings.paused || m_Stats.finished) return;
@@ -63,7 +62,7 @@ void VisualizeState::Update(float dt)
 	}
 }
 
-void VisualizeState::Draw() {
+void Solver::Draw() {
 
 	Rectangle bounds{ GetBounds() };
 
@@ -91,31 +90,29 @@ void VisualizeState::Draw() {
 	}
 }
 
-void VisualizeState::Reset()
+void Solver::Reset()
 {
 	m_Grid.ClearWalls();
 	m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
 	m_Stats = VizStats{};
 	m_Accumulator = 0.0f;
 	m_Started = false; // enbale edit
-	m_SoundPlayed = false;
 	m_Colors = GridColors{};
 	
 
 	return;
 }
 
-void VisualizeState::Restart()
+void Solver::Restart()
 {
 	m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
 	m_Stats = VizStats{};
 	m_Accumulator = 0.0f;
 	m_Settings.paused = false; // so it doesn't restart into a paused state
-	m_SoundPlayed = false;
 
 }
 
-void VisualizeState::PlaceOrToggle() {
+void Solver::PlaceOrToggle() {
 
 	if (ImGui::GetIO().WantCaptureMouse) return;
 

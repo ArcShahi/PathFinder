@@ -11,9 +11,9 @@ target_sources(pathfinder
         PRIVATE 
         src/App.cpp
         src/State.cpp
-        src/MenuState.cpp
-        src/VisualizeState.cpp
-        src/VersusState.cpp
+        src/Menu.cpp
+        src/Solver.cpp
+        src/Versus.cpp
         src/Grid.cpp
         src/Astar.cpp
         src/Dijkstra.cpp
@@ -27,9 +27,9 @@ target_sources(pathfinder
              FILES
                include/State.hpp
                include/StateMachine.hpp
-               include/MenuState.hpp
-               include/VisualizeState.hpp
-               include/VersusState.hpp
+               include/Menu.hpp
+               include/Solver.hpp
+               include/Versus.hpp
                include/Grid.hpp
                include/IPathfinder.hpp
                include/Astar.hpp

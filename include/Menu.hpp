@@ -4,9 +4,9 @@
 #include <Star.hpp>
 #include <vector>
 
-class MenuState : public State {
+class Menu : public State {
 public:
-	explicit MenuState(StateMachine& machine) : State(machine) {}
+	explicit Menu(StateMachine& machine) : State(machine) {}
 	void HandleInput() override;
 	void Update(float dt) override;
 	void Draw() override;

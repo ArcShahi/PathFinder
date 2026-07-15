@@ -4,12 +4,12 @@
 #include <Astar.hpp>
 #include <Dijkstra.hpp>
 #include <UI.hpp>
+#include <memory>
 
 
-
-class VersusState : public State {
+class Versus : public State {
 public:
-	explicit VersusState(StateMachine& machine);
+	explicit Versus(StateMachine& machine);
 	void HandleInput() override;
 	void Update(float dt) override;
 	void Draw() override;
@@ -27,7 +27,7 @@ private:
 	Grid m_Grid{};
 	AStar m_Astar{};
 	Dijkstra m_Dijkstra{};
-
+	std::unique_ptr<IPathFinder>m_Versus{};
 	GridColors m_ColorsA{}, m_ColorsB{};
 	VizSettings m_Settings{};
 	VizStats m_StatsA{}, m_StatsB{};

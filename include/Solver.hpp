@@ -14,10 +14,10 @@ enum class Algo
 	Dijkstra
 };
 
-class VisualizeState:public State
+class Solver:public State
 {
 public:
-	VisualizeState(StateMachine& machine, Algo algo);
+	Solver(StateMachine& machine, Algo algo);
 
 	void HandleInput() override;
 	void Update(float dt) override;

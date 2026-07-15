@@ -1,4 +1,4 @@
-#include <VersusState.hpp>
+#include <Versus.hpp>
 #include <raylib.h>
 #include <raylib.h>
 #include <rlImGui.h>
@@ -7,7 +7,7 @@
 
 
 
-VersusState::VersusState(StateMachine& machine)
+Versus::Versus(StateMachine& machine)
 	:State(machine), m_Grid(GetScreenWidth()/2, GetScreenHeight())
 {
 	
@@ -15,7 +15,7 @@ VersusState::VersusState(StateMachine& machine)
 	m_Grid.SetEnd(m_Grid.Cols() - 1, m_Grid.Rows() - 1);
 }
 
-void VersusState::HandleInput() {
+void Versus::HandleInput() {
 	if (IsKeyPressed(KEY_ESCAPE)) { RequestChange(StateID::MainMenu); return; }
 
 	if (!m_Started) {
@@ -29,21 +29,21 @@ void VersusState::HandleInput() {
 }
 
 
-Rectangle VersusState::LeftBounds() const
+Rectangle Versus::LeftBounds() const
 {
 	float w{ static_cast<float>(GetScreenWidth()) };
 	float h{ static_cast<float>(GetScreenHeight()) };
 	return { 0,0,w / 2.0f,h  };
 }
 
-Rectangle VersusState::RightBounds() const
+Rectangle Versus::RightBounds() const
 {
 	float w{ static_cast<float>(GetScreenWidth()) };
 	float h{ static_cast<float>(GetScreenHeight()) };
 	return { w / 2.0f + 2.0f,0,w / 2.0f - 2.0f,h };
 }
 
-void VersusState::PlaceOrToggle() {
+void Versus::PlaceOrToggle() {
 
 	if (ImGui::GetIO().WantCaptureMouse) return;
 
@@ -73,7 +73,7 @@ void VersusState::PlaceOrToggle() {
 	}
 }
 
-void VersusState::Reset() {
+void Versus::Reset() {
 	m_Grid.ClearWalls();
 	m_Astar.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
 	m_Dijkstra.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
@@ -83,7 +83,7 @@ void VersusState::Reset() {
 	m_Started = false;
 }
 
-void VersusState::Restart() {
+void Versus::Restart() {
 	m_Astar.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
 	m_Dijkstra.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
 	m_StatsA = VizStats{};
@@ -91,8 +91,10 @@ void VersusState::Restart() {
 	m_Accumulator = 0.0f;
 	m_Settings.paused = false;
 }
-void VersusState::Update(float dt) 
+void Versus::Update(float dt) 
 {
+
+	if (IsKeyPressed(KEY_BACKSPACE)) { RequestChange(StateID::MainMenu); return; }
 	if (!m_Started) return;
 	if (m_Settings.paused) return;
 	float stepInterval{ 1.0f / m_Settings.steps };
@@ -120,7 +122,7 @@ void VersusState::Update(float dt)
 	}
 }
 
-void VersusState::Draw() {
+void Versus::Draw() {
 	Rectangle left{ LeftBounds() };
 	Rectangle right{ RightBounds() };
 

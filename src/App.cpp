@@ -1,29 +1,28 @@
 #include <raylib.h>
 #include <rlImGui.h>
 #include <StateMachine.hpp>
-#include <MenuState.hpp>
-#include <VersusState.hpp>
-#include <VisualizeState.hpp>
-#include <Audio.hpp>
+#include <Menu.hpp>
+#include <Versus.hpp>
+#include <Solver.hpp>
 
 int main() {
 
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	InitWindow(1280, 720, "PathFinder");
+	InitWindow(1280, 720, "Pathfinder Sandox");
 	SetWindowMinSize(600, 400);
 
 	rlImGuiSetup(true);
 
 	StateMachine machine;
-	machine.RegisterFactory(StateID::MainMenu, [&machine] { return std::make_unique<MenuState>(machine); });
+	machine.RegisterFactory(StateID::MainMenu, [&machine] { return std::make_unique<Menu>(machine); });
 	machine.RegisterFactory(StateID::AStar, [&machine] {
-		return std::make_unique<VisualizeState>(machine, Algo::Astar);
+		return std::make_unique<Solver>(machine, Algo::Astar);
 		});
 	machine.RegisterFactory(StateID::Dijkstra, [&machine] {
-		return std::make_unique<VisualizeState>(machine, Algo::Dijkstra);
+		return std::make_unique<Solver>(machine, Algo::Dijkstra);
 		});
 	machine.RegisterFactory(StateID::Versus, [&machine] {
-		return std::make_unique<VersusState>(machine);
+		return std::make_unique<Versus>(machine);
 		});
 
 	machine.RequestChange(StateID::MainMenu);

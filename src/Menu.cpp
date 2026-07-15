@@ -1,4 +1,4 @@
-#include <MenuState.hpp>
+#include <Menu.hpp>
 #include <raylib.h>
 
 static void DrawCenteredText(const char* text, int y, int FontSize, Color color)
@@ -14,7 +14,7 @@ static void DrawCenteredText(const char* text, int y, int FontSize, Color color)
      );
 }
 
-void MenuState::HandleInput()
+void Menu::HandleInput()
 {
      if (IsKeyPressed(KEY_DOWN)) m_Selected = (m_Selected + 1) % 3;
      if (IsKeyPressed(KEY_UP))   m_Selected = (m_Selected + 2) % 3;
@@ -28,14 +28,14 @@ void MenuState::HandleInput()
      }
 }
 
-void MenuState::Update(float dt)
+void Menu::Update(float dt)
 {
      for (auto& star : m_Stars)
           star.Update(GetFrameTime());
 }
 
 
-void MenuState::Draw() {
+void Menu::Draw() {
 
      for (auto& stars : m_Stars)
           stars.Draw();
