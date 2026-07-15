@@ -47,7 +47,7 @@ void DrawVizPanel(const char* label, VizSettings& settings, VizStats& stats, Gri
      ColorEditRGB("Grid", colors.empty);
      ColorEditRGB("Grid Edges", colors.gridLine);
      ColorEditRGB("Visited 0", colors.visitedStart);
-     ColorEditRGB("Visited 2", colors.visitedEnd);
+     ColorEditRGB("Visited 2", colors.visitedEnd); 
      ColorEditRGB("Path", colors.path);
      ColorEditRGB("Wall", colors.wall);
      ColorEditRGB("Start", colors.start);

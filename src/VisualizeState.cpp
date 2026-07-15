@@ -4,7 +4,7 @@
 #include <rlImGui.h>
 #include <Dijkstra.hpp>
 #include <imgui.h>
-
+#include <Audio.hpp>
 
 VisualizeState::VisualizeState(StateMachine& machine, Algo algo)
 	: State(machine), m_Algo(algo), m_Grid(GetScreenWidth(), GetScreenHeight())
@@ -59,6 +59,7 @@ void VisualizeState::Update(float dt)
 	if (m_Stats.finished) {
 		m_Stats.found = m_Solver->Found();
 		m_Stats.pathLength = static_cast<int>(m_Solver->GetPath().size());
+
 	}
 }
 
@@ -97,6 +98,9 @@ void VisualizeState::Reset()
 	m_Stats = VizStats{};
 	m_Accumulator = 0.0f;
 	m_Started = false; // enbale edit
+	m_SoundPlayed = false;
+	m_Colors = GridColors{};
+	
 
 	return;
 }
@@ -107,6 +111,7 @@ void VisualizeState::Restart()
 	m_Stats = VizStats{};
 	m_Accumulator = 0.0f;
 	m_Settings.paused = false; // so it doesn't restart into a paused state
+	m_SoundPlayed = false;
 
 }
 

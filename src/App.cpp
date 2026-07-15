@@ -4,13 +4,14 @@
 #include <MenuState.hpp>
 #include <VersusState.hpp>
 #include <VisualizeState.hpp>
-
+#include <Audio.hpp>
 
 int main() {
 
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	InitWindow(1280, 720, "PathFinder");
 	SetWindowMinSize(600, 400);
+
 	rlImGuiSetup(true);
 
 	StateMachine machine;
@@ -40,6 +41,7 @@ int main() {
 		machine.Draw();
 		EndDrawing();
 	}
+	
 	rlImGuiShutdown();
 	CloseWindow();
 }
