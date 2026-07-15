@@ -24,13 +24,13 @@ private:
 private:
 
 	// One shared maze,we're gonna share it
-	Grid m_Grid;
-	AStar m_Astar;
-	Dijkstra m_Dijkstra;
+	Grid m_Grid{};
+	AStar m_Astar{};
+	Dijkstra m_Dijkstra{};
 
-	GridColors m_ColorsA, m_ColorsB;
-	VizSettings m_Settings;
-	VizStats m_StatsA, m_StatsB;
+	GridColors m_ColorsA{}, m_ColorsB{};
+	VizSettings m_Settings{};
+	VizStats m_StatsA{}, m_StatsB{};
 
 	float m_Accumulator{ 0.0f };
 	bool m_Started{ false };

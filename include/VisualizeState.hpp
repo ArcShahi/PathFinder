@@ -29,8 +29,8 @@ private:
 	void PlaceOrToggle(); //for shared mouse-click
 
 private:
-	Algo m_Algo;
-	Grid m_Grid;
+	Algo m_Algo{};
+	Grid m_Grid{};
 	std::unique_ptr<IPathFinder>m_Solver{};
 	GridColors m_Colors{};
 	VizSettings m_Settings{};

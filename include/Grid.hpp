@@ -26,6 +26,7 @@ struct GridColors
 class Grid
 {
 public:
+	Grid() = default;
 	Grid(int cols, int rows);
 
 	float CellSize(Rectangle& bound)const;
@@ -37,6 +38,7 @@ public:
 	void SetWall(int x, int y,bool isWall);
 	bool IsWall(int x, int y)const;
 	void ClearWalls();
+
 	void SetStart(int x, int y)
 	{
 		m_Start = { static_cast<float>(x),

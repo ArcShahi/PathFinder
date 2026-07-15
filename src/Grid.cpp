@@ -68,8 +68,8 @@ void Grid::Draw(Rectangle bounds, const GridColors& colors,
 		}
 	}
 
-	Rectangle sr = { bounds.x + m_Start.x * cell, bounds.y + m_Start.y * cell, cell, cell };
-	Rectangle er = { bounds.x + m_End.x * cell,   bounds.y + m_End.y * cell,   cell, cell };
+	Rectangle sr  { bounds.x + m_Start.x * cell, bounds.y + m_Start.y * cell, cell, cell };
+	Rectangle er  { bounds.x + m_End.x * cell,   bounds.y + m_End.y * cell,   cell, cell };
 	DrawRectangleRec(sr, colors.start);
 	DrawRectangleRec(er, colors.end);
 }

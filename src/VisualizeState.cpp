@@ -54,24 +54,26 @@ void VisualizeState::Update(float dt)
 	}
 
 	m_Stats.elapsedTime += dt;
-	m_Stats.nodesVisited = (int)m_Solver->GetVisited().size();
+	m_Stats.nodesVisited = static_cast<int>(m_Solver->GetVisited().size());
+
 	if (m_Stats.finished) {
 		m_Stats.found = m_Solver->Found();
-		m_Stats.pathLength = (int)m_Solver->GetPath().size();
+		m_Stats.pathLength = static_cast<int>(m_Solver->GetPath().size());
 	}
 }
 
 void VisualizeState::Draw() {
 
-	Rectangle bounds = GetBounds();
+	Rectangle bounds{ GetBounds() };
 
-	const auto* visited = m_Started ? &m_Solver->GetVisited() : nullptr;
-	const auto* path = (m_Started && m_Stats.finished && m_Stats.found) ?
-		&m_Solver->GetPath() : nullptr;
+	const auto* visited{ m_Started ? &m_Solver->GetVisited() : nullptr };
+	const auto* path{ (m_Started && m_Stats.finished && m_Stats.found) ?
+		&m_Solver->GetPath() : nullptr };
 	m_Grid.Draw(bounds, m_Colors, visited, path);
 
 	rlImGuiBegin();
-	const char* label = (m_Algo == Algo::Astar) ? "A* Controls" : "Dijkstra Controls";
+	const char* label{ (m_Algo == Algo::Astar) ? "A* Controls" : "Dijkstra Controls" };
+
 	DrawVizPanel(label, m_Settings, m_Stats, m_Colors);
 	rlImGuiEnd();
 
@@ -115,7 +117,7 @@ void VisualizeState::PlaceOrToggle() {
 	Rectangle bounds{ GetBounds() };
 	Vector2 cell = m_Grid.ScreenToCell(GetMousePosition(), bounds);
 	if (cell.x < 0) return;
-	int cx = (int)cell.x, cy = (int)cell.y;
+	int cx{ static_cast<int>(cell.x) }, cy{ static_cast<int>(cell.y) };
 
 	bool placingStart{ IsKeyDown(KEY_S) };
 	bool placingEnd{ IsKeyDown(KEY_E) };

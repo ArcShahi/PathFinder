@@ -16,23 +16,23 @@ private:
      struct Node
      {
           int x{}, y{};
-          float f;
+          float f{};
           bool operator>(const Node& o) const { return f > o.f; }
      };
 
      static int Key(int x, int y, int cols) { return y * cols + x; }
      void ReconstructPath();
 
-     const Grid* m_Grid = nullptr;
+     const Grid* m_Grid{ nullptr };
      Vector2 m_Start{}, m_End{};
 
      std::priority_queue<Node, std::vector<Node>, std::greater<Node>> m_Open{};
      std::unordered_map<int, float> m_GScore{};
      std::unordered_map<int, int> m_CameFrom{};   // key -> key
-     std::vector<bool> m_Closed;
+     std::vector<bool> m_Closed{};
 
-     std::vector<Vector2> m_Visited;
-     std::vector<Vector2> m_Path;
+     std::vector<Vector2> m_Visited{};
+     std::vector<Vector2> m_Path{};
      bool m_Found{ false };
      bool m_Done{ false };
 };

@@ -44,14 +44,15 @@ Rectangle VersusState::RightBounds() const
 }
 
 void VersusState::PlaceOrToggle() {
+
 	if (ImGui::GetIO().WantCaptureMouse) return;
 
 	Vector2 mouse{ GetMousePosition() };
 	Rectangle bounds{ (mouse.x < GetScreenWidth() / 2.0f) ? LeftBounds() : RightBounds() };
-
 	Vector2 cell{ m_Grid.ScreenToCell(mouse, bounds) };
+
 	if (cell.x < 0) return;
-	int cx = (int)cell.x, cy = (int)cell.y;
+	int cx{ static_cast<int>(cell.x) }, cy{ static_cast<int>(cell.y) };
 
 	bool placingStart{ IsKeyDown(KEY_S) };
 	bool placingEnd{ IsKeyDown(KEY_E) };
@@ -95,6 +96,7 @@ void VersusState::Update(float dt)
 	if (!m_Started) return;
 	if (m_Settings.paused) return;
 	float stepInterval{ 1.0f / m_Settings.steps };
+
 	m_Accumulator += dt;
 	while (m_Accumulator >= stepInterval && !(m_StatsA.finished && m_StatsB.finished)) {
 		if (!m_StatsA.finished) m_StatsA.finished = m_Astar.Step();
@@ -105,11 +107,17 @@ void VersusState::Update(float dt)
 	if (!m_StatsA.finished) m_StatsA.elapsedTime += dt;
 	if (!m_StatsB.finished) m_StatsB.elapsedTime += dt;
 
-	m_StatsA.nodesVisited = (int)m_Astar.GetVisited().size();
-	m_StatsB.nodesVisited = (int)m_Dijkstra.GetVisited().size();
+	m_StatsA.nodesVisited = static_cast<int>(m_Astar.GetVisited().size());
+	m_StatsB.nodesVisited = static_cast<int>(m_Dijkstra.GetVisited().size());
 
-	if (m_StatsA.finished) { m_StatsA.found = m_Astar.Found(); m_StatsA.pathLength = (int)m_Astar.GetPath().size(); }
-	if (m_StatsB.finished) { m_StatsB.found = m_Dijkstra.Found(); m_StatsB.pathLength = (int)m_Dijkstra.GetPath().size(); }
+	if (m_StatsA.finished) {
+		m_StatsA.found = m_Astar.Found(); 
+		m_StatsA.pathLength = static_cast<int>(m_Astar.GetVisited().size()); 
+	}
+	if (m_StatsB.finished) {
+		m_StatsB.found = m_Dijkstra.Found(); 
+		m_StatsB.pathLength = static_cast<int>(m_Dijkstra.GetVisited().size());
+	}
 }
 
 void VersusState::Draw() {
@@ -117,12 +125,12 @@ void VersusState::Draw() {
 	Rectangle right{ RightBounds() };
 
 
-	const auto* visitedA = m_Started ? &m_Astar.GetVisited() : nullptr;
-	const auto* pathA = (m_Started && m_StatsA.finished && m_StatsA.found) ? &m_Astar.GetPath() : nullptr;
+	const auto* visitedA{ m_Started ? &m_Astar.GetVisited() : nullptr };
+	const auto* pathA{ (m_Started && m_StatsA.finished && m_StatsA.found) ? &m_Astar.GetPath() : nullptr };
 	m_Grid.Draw(left, m_ColorsA, visitedA, pathA);
 
-	const auto* visitedB = m_Started ? &m_Dijkstra.GetVisited() : nullptr;
-	const auto* pathB = (m_Started && m_StatsB.finished && m_StatsB.found) ? &m_Dijkstra.GetPath() : nullptr;
+	const auto* visitedB{ m_Started ? &m_Dijkstra.GetVisited() : nullptr };
+	const auto* pathB{ (m_Started && m_StatsB.finished && m_StatsB.found) ? &m_Dijkstra.GetPath() : nullptr };
 	m_Grid.Draw(right, m_ColorsB, visitedB, pathB);
 
 	DrawLine(GetScreenWidth() / 2, 0, GetScreenWidth() / 2, GetScreenHeight(), GRAY);

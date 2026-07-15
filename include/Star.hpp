@@ -8,12 +8,12 @@ class Star
 public:
 	Star()
 	{
-		const auto Width{ static_cast<float>(GetScreenWidth()) };
-		const auto Height{ static_cast<float>(GetScreenHeight()) };
+		const auto width{ static_cast<float>(GetScreenWidth()) };
+		const auto height{ static_cast<float>(GetScreenHeight()) };
 
-		x = GetRandomValue(-Width / 2, Width / 2);
-		y = GetRandomValue(-Height / 2, Height / 2);
-		z = GetRandomValue(0, Width);
+		x = GetRandomValue(-width / 2, width / 2);
+		y = GetRandomValue(-height / 2, height / 2);
+		z = GetRandomValue(0, width);
 		pz = z;
 	}
 
@@ -36,13 +36,13 @@ inline float Star::Map(float value, float InMin, float InMax, float OutMin, floa
 
 inline void Star::Reset()
 {
-	const float Width = static_cast<float>(GetScreenWidth());
-	const float Height = static_cast<float>(GetScreenHeight());
+	const float width = static_cast<float>(GetScreenWidth());
+	const float height = static_cast<float>(GetScreenHeight());
 
-	x = static_cast<float>(GetRandomValue(-Width / 2, Width / 2));
-	y = static_cast<float>(GetRandomValue(-Height / 2, Height / 2));
+	x = static_cast<float>(GetRandomValue(-width / 2, width / 2));
+	y = static_cast<float>(GetRandomValue(-height / 2, height / 2));
 
-	z = Width;
+	z = width;
 	pz = z;
 }
 
@@ -68,17 +68,17 @@ inline void Star::Update(float dt)
 inline void Star::Draw()
 {
 
-	const auto Width = GetScreenWidth();
-	const auto Height = GetScreenHeight();
+	const auto width = GetScreenWidth();
+	const auto height = GetScreenHeight();
 
 	// Center horizontally and  vertically
-	float sx{ Map(x / z, 0.0, 1.0f, 0.0f, Width) + Width *0.5f };
-	float sy{ Map(y / z, 0.0, 1.0f, 0.0f, Height) + Height*0.5f };
-	float r = Map(z, 0.0, Width, 3.f, 0.f);
+	float sx{ Map(x / z, 0.0, 1.0f, 0.0f, width) + width *0.5f };
+	float sy{ Map(y / z, 0.0, 1.0f, 0.0f, height) + height*0.5f };
+	float r = Map(z, 0.0, width, 3.f, 0.f);
 	DrawCircle(sx, sy, r, WHITE);
 
-	float px{ Map(x / pz, 0.0f, 1.0f, 0.0f, Width) + Width *0.5f };
-	float py{ Map(y / pz, 0.0f, 1.0f, 0.0, Height) + Height *0.5f };
+	float px{ Map(x / pz, 0.0f, 1.0f, 0.0f, width) + width *0.5f };
+	float py{ Map(y / pz, 0.0f, 1.0f, 0.0, height) + height *0.5f };
 
 	pz = z;
 

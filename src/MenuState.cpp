@@ -3,7 +3,7 @@
 
 static void DrawCenteredText(const char* text, int y, int FontSize, Color color)
 {
-     int textWidth = MeasureText(text, FontSize);
+     int textWidth{ MeasureText(text, FontSize) };
 
      DrawText(
           text,
@@ -40,13 +40,13 @@ void MenuState::Draw() {
      for (auto& stars : m_Stars)
           stars.Draw();
 
-     const char* options[3] = { "A*", "Dijkstra", "Versus" };
-     const int height = GetScreenHeight();
+     const char* options[3] { "A*", "Dijkstra", "Versus" };
+     const int height{ GetScreenHeight() };
      DrawCenteredText("PathFinder Sandbox", height * 0.20f, 50,RED);
      float alignY{ 0.45f };
 
     
-     for (int i = 0; i < 3; ++i) {
+     for (int i{ 0 }; i < 3; ++i) {
           Color c = (i == m_Selected) ? PINK : WHITE;
           DrawCenteredText(options[i], height *alignY, 30, c);
           alignY += 0.07f;

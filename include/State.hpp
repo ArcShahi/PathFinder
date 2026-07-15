@@ -19,9 +19,9 @@ class State
 public:
 	using Ptr = std::unique_ptr<State>;
 	explicit State(StateMachine& machine)
-		:m_Machine{machine}
+		:m_Machine{ machine }
 	{}
-	virtual ~State()=default;
+	virtual ~State() = default;
 	virtual void HandleInput() = 0;
 	virtual void Update(float dt) = 0;
 	virtual void Draw() = 0;
