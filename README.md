@@ -68,5 +68,5 @@ AI usage for code generation and documentation is forbidden for this project.
 
 
 ## TODO
-- Minor renaming
 - Optimize heuristics for A*
+- maybe add sound
