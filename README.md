@@ -66,7 +66,7 @@ Add  `CMakePresets.json` to root directory:
 	"configurePresets": [
 		{
 			"name": "default",
-			"generator": "Ninja",
+			"generator": "Ninja Multi-Config",
 			"binaryDir": "${sourceDir}/out",
 			"cacheVariables": {
 				"CMAKE_TOOLCHAIN_FILE": "path/to/your/vcpkg.cmake"
@@ -81,7 +81,7 @@ Check CMake toolchain file path : `vcpkg integrate install`.
 If using `vcpkg` with any other build system them just simply pass :
 
 ```powershell
-cmake -B out\ -"-DCMAKE_TOOLCHAIN_FILE=path/to/your/vcpkg.cmake"
+cmake -B out -"-DCMAKE_TOOLCHAIN_FILE=path/to/your/vcpkg.cmake"
 ```
 when generating build files.
 
