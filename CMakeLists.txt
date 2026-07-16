@@ -47,7 +47,9 @@ add_subdirectory(vendor/rlImGui)
 target_compile_features(pathfinder PRIVATE cxx_std_23)
 # Enable Multiprocessor compilation for MSVC 
 target_compile_options(pathfinder PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/MP>)
-
+target_link_options(pathfinder PRIVATE
+    $<$<CXX_COMPILER_ID:MSVC>:/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup>
+)
 # Link libraries
 target_link_libraries(pathfinder PRIVATE raylib imgui rlimgui)
 
