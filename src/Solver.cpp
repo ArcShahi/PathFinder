@@ -22,14 +22,14 @@ Rectangle GetBounds() {
 }
 
 void Solver::HandleInput() {
-  if (IsKeyPressed(KEY_BACKSPACE)) {
+  if (IsKeyPressed(KEY_ESCAPE)) {
     RequestChange(StateID::MainMenu);
     return;
   }
 
   if (!m_Started || m_Settings.paused) {
     PlaceOrToggle();
-    if (!m_Started &&IsKeyPressed(KEY_SPACE)) {
+    if (!m_Started && IsKeyPressed(KEY_SPACE)) {
       m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
       m_Started = true;
     }

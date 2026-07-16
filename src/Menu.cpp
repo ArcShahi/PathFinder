@@ -13,7 +13,10 @@ void Menu::HandleInput() {
     m_Selected = (m_Selected + 1) % 3;
   if (IsKeyPressed(KEY_UP))
     m_Selected = (m_Selected + 2) % 3;
-
+  if (IsKeyPressed(KEY_ESCAPE)) {
+    RequestChange(StateID::Quit);
+    return;
+  }
   if (IsKeyPressed(KEY_ENTER)) {
     switch (m_Selected) {
     case 0:

@@ -10,6 +10,7 @@ int main() {
   SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(1280, 720, "Pathfinder Sandox");
   SetWindowMinSize(600, 400);
+  SetExitKey(KEY_NULL);
 
   rlImGuiSetup(true);
 
@@ -30,7 +31,7 @@ int main() {
   machine.RequestChange(StateID::MainMenu);
   machine.ApplyPendingChange();
 
-  while (!WindowShouldClose()) {
+  while (!WindowShouldClose() && !machine.QuitRequested()) {
     float dt = GetFrameTime();
     if (IsKeyPressed(KEY_F11))
       ToggleBorderlessWindowed();

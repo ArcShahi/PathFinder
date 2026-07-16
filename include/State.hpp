@@ -2,7 +2,7 @@
 
 #include <memory>
 
-enum class StateID { MainMenu, AStar, Dijkstra, Versus, None };
+enum class StateID { MainMenu, AStar, Dijkstra, Versus,Quit, None };
 
 class StateMachine; // fwd declaration only, for preventing ciculation
                     // dependency
