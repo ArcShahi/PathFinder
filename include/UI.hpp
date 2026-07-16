@@ -7,7 +7,7 @@ struct VizSettings {
 	float steps{ 100.0f };
 	bool paused{ false };
 	bool resetRequested{ false };
-	bool restartRequested{ false };
+	bool rerunRequested{ false };
 };
 
 struct VizStats {

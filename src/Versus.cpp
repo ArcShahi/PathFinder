@@ -16,7 +16,7 @@ void Versus::HandleInput() {
     return;
   }
 
-  if (!m_Started) {
+  if (!m_Started && m_Settings.paused) {
     PlaceOrToggle();
     if (IsKeyPressed(KEY_SPACE)) {
       m_Astar.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
@@ -84,9 +84,10 @@ void Versus::Reset() {
   m_StatsB = VizStats{};
   m_Accumulator = 0.0f;
   m_Started = false;
+  m_Settings.paused = false;
 }
 
-void Versus::Restart() {
+void Versus::Rerun() {
   m_Astar.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
   m_Dijkstra.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
   m_StatsA = VizStats{};
@@ -161,8 +162,8 @@ void Versus::Draw() {
     Reset();
     m_Settings.resetRequested = false;
   }
-  if (m_Settings.restartRequested) {
-    Restart();
-    m_Settings.restartRequested = false;
+  if (m_Settings.rerunRequested) {
+    Rerun();
+    m_Settings.rerunRequested = false;
   }
 }

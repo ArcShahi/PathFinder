@@ -19,7 +19,7 @@ private:
 
   void PlaceOrToggle();
   void Reset();
-  void Restart();
+  void Rerun();
 
 private:
   // One shared maze,we're gonna share it

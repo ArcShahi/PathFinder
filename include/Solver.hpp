@@ -19,7 +19,7 @@ public:
 
 private:
   void Reset();
-  void Restart();
+  void Rerun();
   void PlaceOrToggle(); // for shared mouse-click
 
 private:

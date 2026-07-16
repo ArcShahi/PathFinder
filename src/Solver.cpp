@@ -27,7 +27,7 @@ void Solver::HandleInput() {
     return;
   }
 
-  if (!m_Started) {
+  if (!m_Started || m_Settings.paused) {
     PlaceOrToggle();
     if (IsKeyPressed(KEY_SPACE)) {
       m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
@@ -80,9 +80,9 @@ void Solver::Draw() {
     m_Settings.resetRequested = false;
   }
 
-  if (m_Settings.restartRequested) {
-    Restart();
-    m_Settings.restartRequested = false;
+  if (m_Settings.rerunRequested) {
+    Rerun();
+    m_Settings.rerunRequested = false;
   }
 }
 
@@ -93,11 +93,12 @@ void Solver::Reset() {
   m_Accumulator = 0.0f;
   m_Started = false; // enbale edit
   m_Colors = GridColors{};
+  m_Settings.paused = false;
 
   return;
 }
 
-void Solver::Restart() {
+void Solver::Rerun() {
   m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
   m_Stats = VizStats{};
   m_Accumulator = 0.0f;

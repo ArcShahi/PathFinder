@@ -33,16 +33,18 @@ void DrawVizPanel(const char *label, VizSettings &settings, VizStats &stats,
   ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
   ImGui::Separator();
 
-  if (ImGui::Button(settings.paused ? "Resume" : "Pause"))
-    settings.paused = !settings.paused;
+  if (!settings.paused) {
+    if (ImGui::Button("Pause"))
+      settings.paused = true;
+  } else {
+    ImGui::Text("Paused: edit walls, then Rerun");
+  }
 
-  ImGui::SameLine();
-  if (ImGui::Button("Restart"))
-    settings.restartRequested = true;
+  if (ImGui::Button("Rerun"))
+    settings.rerunRequested = true;
   ImGui::SameLine();
   if (ImGui::Button("Reset"))
     settings.resetRequested = true;
-
   ImGui::SliderFloat("Speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
 
   ImGui::Separator();
@@ -70,17 +72,20 @@ void DrawVizPanel(VizSettings &settings, VizStats &statsA, GridColors &colorsA,
   ImGui::Begin("Versus Controls");
   ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
   ImGui::Separator();
+  if (!settings.paused) {
+    if (ImGui::Button("Pause"))
+      settings.paused = true;
+  } else {
+    ImGui::Text("Paused: edit walls, then Rerun");
+  }
 
-  if (ImGui::Button(settings.paused ? "Resume" : "Pause"))
-    settings.paused = !settings.paused;
-  ImGui::SameLine();
-  if (ImGui::Button("Restart"))
-    settings.restartRequested = true;
+  if (ImGui::Button("Rerun"))
+    settings.rerunRequested = true;
   ImGui::SameLine();
   if (ImGui::Button("Reset"))
     settings.resetRequested = true;
 
-  ImGui::SliderFloat("Speed", &settings.steps, 1.0f, 500.f, "%.0f steps/sec");
+  ImGui::SliderFloat("Speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
 
   ImGui::Separator();
   ColorEditRGB("Grid", colorsA.empty);
