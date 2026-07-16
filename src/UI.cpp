@@ -105,7 +105,7 @@ void DrawVizPanel(VizSettings &settings, VizStats &statsA, GridColors &colorsA,
   ImGui::Separator();
 
   if (!settings.paused) {
-    if (ImGui::Button("Pause"))
+    if (ImGui::Button("pause"))
       settings.paused = true;
   } else {
     ImGui::Text("Paused: can edit walls, then Rerun");
