@@ -41,11 +41,11 @@ void Menu::Draw() {
 
   const char *options[3]{"A*", "Dijkstra", "Versus"};
   const int height{GetScreenHeight()};
-  DrawCenteredText("PathFinder Sandbox", height * 0.20f, 50, RED);
+  DrawCenteredText("Pathfinder Sandbox", height * 0.20f, 75, RED);
   float alignY{0.45f};
 
   for (int i{0}; i < 3; ++i) {
-    Color c = (i == m_Selected) ? PINK : WHITE;
+    Color c = (i == m_Selected) ? MAROON : WHITE;
     DrawCenteredText(options[i], height * alignY, 30, c);
     alignY += 0.07f;
   }

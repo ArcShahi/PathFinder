@@ -4,7 +4,7 @@
 #include <Grid.hpp> // for GridColors
 
 struct VizSettings {
-	float steps{ 50.0f };
+	float steps{ 100.0f };
 	bool paused{ false };
 	bool resetRequested{ false };
 	bool restartRequested{ false };
