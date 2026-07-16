@@ -14,8 +14,8 @@ static void DrawStatsBlock(const char *label, VizStats &stats,
                            GridColors &colors) {
   ImGui::PushID(label);
   ImGui::Text("%s", label);
-  ColorEditRGB("Visited 0", colors.visitedStart);
-  ColorEditRGB("Visited 1", colors.visitedEnd);
+  ColorEditRGB("trail -", colors.visitedStart);
+  ColorEditRGB("trail +", colors.visitedEnd);
   ColorEditRGB("Path", colors.path);
 
   ImGui::Text("Time: %.2fs", stats.elapsedTime);
@@ -31,32 +31,44 @@ void DrawVizPanel(const char *label, VizSettings &settings, VizStats &stats,
                   GridColors &colors) {
   ImGui::Begin(label);
   ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
+
+  ImGui::Separator();
+  ColorEditRGB("grid", colors.empty);
+  ColorEditRGB("grid lines", colors.gridLine);
+  ColorEditRGB("trail -", colors.visitedStart);
+  ColorEditRGB("trail +", colors.visitedEnd);
+  ColorEditRGB("path", colors.path);
+  ColorEditRGB("wall", colors.wall);
+  ColorEditRGB("start", colors.start);
+  ColorEditRGB("end", colors.end);
+
   ImGui::Separator();
 
   if (!settings.paused) {
-    if (ImGui::Button("Pause"))
+    if (ImGui::Button("pause"))
       settings.paused = true;
   } else {
-    ImGui::Text("Paused: edit walls, then Rerun");
+    ImGui::Text("Paused: can edit walls, then Rerun");
   }
 
-  if (ImGui::Button("Rerun"))
+  if (ImGui::Button("re-run"))
     settings.rerunRequested = true;
   ImGui::SameLine();
-  if (ImGui::Button("Reset"))
+  if (ImGui::Button("reset"))
     settings.resetRequested = true;
-  ImGui::SliderFloat("Speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
 
+  // Help Box
+  ImGui::SameLine();
+  if (ImGui::Button("help")) {
+    stats.help = !stats.help;
+  }
+  if (stats.help) {
+    ImGui::Text("SPACE to run\n"
+                "Hold LMB and drag to place walls\n"
+                "Hold RMB and drag to erase wall\n");
+  }
   ImGui::Separator();
-  ColorEditRGB("Grid", colors.empty);
-  ColorEditRGB("Grid Edges", colors.gridLine);
-  ColorEditRGB("Visited 0", colors.visitedStart);
-  ColorEditRGB("Visited 1", colors.visitedEnd);
-  ColorEditRGB("Path", colors.path);
-  ColorEditRGB("Wall", colors.wall);
-  ColorEditRGB("Start", colors.start);
-  ColorEditRGB("End", colors.end);
-
+  ImGui::SliderFloat("speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
   ImGui::Separator();
   ImGui::Text("Time: %.2fs", stats.elapsedTime);
   ImGui::Text("Nodes visited: %d", stats.nodesVisited);
@@ -71,28 +83,13 @@ void DrawVizPanel(VizSettings &settings, VizStats &statsA, GridColors &colorsA,
                   VizStats &statsB, GridColors &colorsB) {
   ImGui::Begin("Versus Controls");
   ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
-  ImGui::Separator();
-  if (!settings.paused) {
-    if (ImGui::Button("Pause"))
-      settings.paused = true;
-  } else {
-    ImGui::Text("Paused: edit walls, then Rerun");
-  }
-
-  if (ImGui::Button("Rerun"))
-    settings.rerunRequested = true;
-  ImGui::SameLine();
-  if (ImGui::Button("Reset"))
-    settings.resetRequested = true;
-
-  ImGui::SliderFloat("Speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
 
   ImGui::Separator();
-  ColorEditRGB("Grid", colorsA.empty);
-  ColorEditRGB("Grid Edges", colorsA.gridLine);
-  ColorEditRGB("Wall", colorsA.wall);
-  ColorEditRGB("Start", colorsA.start);
-  ColorEditRGB("End", colorsA.end);
+  ColorEditRGB("grid", colorsA.empty);
+  ColorEditRGB("grid lines", colorsA.gridLine);
+  ColorEditRGB("wall", colorsA.wall);
+  ColorEditRGB("start", colorsA.start);
+  ColorEditRGB("end", colorsA.end);
   colorsB.empty = colorsA.empty;
   colorsB.wall = colorsA.wall;
   colorsB.gridLine = colorsA.gridLine;
@@ -102,9 +99,25 @@ void DrawVizPanel(VizSettings &settings, VizStats &statsA, GridColors &colorsA,
   ImGui::Separator();
   DrawStatsBlock("A*", statsA, colorsA);
   ImGui::Separator();
-  // ImGui::NextColumn();
+  ImGui::Separator();
   DrawStatsBlock("Dijkstra", statsB, colorsB);
-  // ImGui::Columns(1);
 
+  ImGui::Separator();
+
+  if (!settings.paused) {
+    if (ImGui::Button("Pause"))
+      settings.paused = true;
+  } else {
+    ImGui::Text("Paused: can edit walls, then Rerun");
+  }
+
+  if (ImGui::Button("re-run"))
+    settings.rerunRequested = true;
+  ImGui::SameLine();
+  if (ImGui::Button("reset"))
+    settings.resetRequested = true;
+  ImGui::Separator();
+
+  ImGui::SliderFloat("speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
   ImGui::End();
 }

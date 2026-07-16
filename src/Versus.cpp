@@ -16,9 +16,9 @@ void Versus::HandleInput() {
     return;
   }
 
-  if (!m_Started && m_Settings.paused) {
+  if (!m_Started || m_Settings.paused) {
     PlaceOrToggle();
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (!m_Started&& IsKeyPressed(KEY_SPACE)) {
       m_Astar.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
       m_Dijkstra.Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
       m_Started = true;
@@ -66,11 +66,8 @@ void Versus::PlaceOrToggle() {
   if (placingStart || placingEnd)
     return;
 
-  if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-    m_PaintValue = !m_Grid.IsWall(cx, cy);
-    m_Grid.SetWall(cx, cy, m_PaintValue);
-  } else if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-    m_Grid.SetWall(cx, cy, m_PaintValue);
+  if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+    m_Grid.SetWall(cx, cy, true);
   } else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) {
     m_Grid.SetWall(cx, cy, false);
   }

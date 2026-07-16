@@ -29,7 +29,7 @@ void Solver::HandleInput() {
 
   if (!m_Started || m_Settings.paused) {
     PlaceOrToggle();
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (!m_Started &&IsKeyPressed(KEY_SPACE)) {
       m_Solver->Init(m_Grid, m_Grid.GetStart(), m_Grid.GetEnd());
       m_Started = true;
     }
@@ -130,13 +130,9 @@ void Solver::PlaceOrToggle() {
 
   if (placingStart || placingEnd)
     return;
-  // held (not just pressed) so dragging paints continuously
-  if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-    m_PaintValue = !m_Grid.IsWall(cx, cy);
-    m_Grid.SetWall(cx, cy, m_PaintValue);
-  }
+
   if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-    m_Grid.SetWall(cx, cy, m_PaintValue);
+    m_Grid.SetWall(cx, cy, true);
   else if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
-    m_Grid.SetWall(cx, cy, m_PaintValue);
+    m_Grid.SetWall(cx, cy, false);
 }

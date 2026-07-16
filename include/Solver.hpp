@@ -32,5 +32,4 @@ private:
 
   float m_Accumulator{0.0f};
   bool m_Started{false};
-  bool m_PaintValue{false};
 };
