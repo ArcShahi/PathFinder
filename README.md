@@ -57,11 +57,39 @@ cmake -build out --config release
 
 ```
 
+If you had used `vcpkg` to install `raylib` and using Visual Studio 2026:
+
+Add  `CMakePresets.json` to root directory: 
+```
+    {
+	"version": 6,
+	"configurePresets": [
+		{
+			"name": "default",
+			"generator": "Ninja",
+			"binaryDir": "${sourceDir}/out",
+			"cacheVariables": {
+				"CMAKE_TOOLCHAIN_FILE": "path/to/your/vcpkg.cmake"
+			}
+		}
+	]
+}
+```
+
+Check CMake toolchain file path : `vcpkg integrate install`.
+
+If using `vckpkg` with any other build system them just simply pass :
+
+```powershell
+cmake -B out\ -"-DCMAKE_TOOLCHAIN_FILE=Your/path/to/your/vcpkg.cmake"
+```
+when genrating build files.
+
 
 ## Usage
 
 - Hold LMB and drag to place walls
-- Click at a wall to erase it
+- Hold LMB and drag on walls to erase them
 - S + LMB to place starting cell
 - E + LMB to place ending cell
 - Space to start the visualization
