@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 4.2)
 project(PathFinder 
-    VERSION 3.0
+    VERSION 3.6
     DESCRIPTION "PathFinder Application"
     LANGUAGES CXX
 )

@@ -30,7 +30,8 @@ static void DrawStatsBlock(const char *label, VizStats &stats,
 void DrawVizPanel(const char *label, VizSettings &settings, VizStats &stats,
                   GridColors &colors) {
   ImGui::Begin(label);
-  ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
+  ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "FPS %.1f",
+                     ImGui::GetIO().Framerate);
 
   ImGui::Separator();
   ColorEditRGB("grid", colors.empty);
@@ -63,10 +64,15 @@ void DrawVizPanel(const char *label, VizSettings &settings, VizStats &stats,
     stats.help = !stats.help;
   }
   if (stats.help) {
-    ImGui::Text("SPACE to run\n"
-                "Hold LMB and drag to place walls\n"
-                "Hold RMB and drag to erase wall\n");
+    ImGui::TextColored(ImVec4(0.7f, 0.7f, 0.7f, 1.0f),
+                       "- SPACE to run\n"
+                       "- Hold LMB and drag to place walls\n"
+                       "- Hold RMB and drag to erase walls\n"
+                       "- S + LMB to place starting point\n"
+                       "- E + LMB to place ending point\n");
   }
+
+
   ImGui::Separator();
   ImGui::SliderFloat("speed", &settings.steps, 1.0f, 1000.f, "%.0f steps/sec");
   ImGui::Separator();
@@ -82,7 +88,6 @@ void DrawVizPanel(const char *label, VizSettings &settings, VizStats &stats,
 void DrawVizPanel(VizSettings &settings, VizStats &statsA, GridColors &colorsA,
                   VizStats &statsB, GridColors &colorsB) {
   ImGui::Begin("Versus Controls");
-  ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
 
   ImGui::Separator();
   ColorEditRGB("grid", colorsA.empty);

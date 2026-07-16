@@ -3,7 +3,7 @@
 A* , Dijkstra pathfinder alogrithm visualization written in C++ using `raylib`, `ImGui`.
 
 
-`VERSION 3.1`
+`VERSION 3.6`
 
 ## Features
 - Visualize A* and Dijkstra 
@@ -84,16 +84,6 @@ If using `vcpkg` with any other build system them just simply pass :
 cmake -B out\ -"-DCMAKE_TOOLCHAIN_FILE=path/to/your/vcpkg.cmake"
 ```
 when generating build files.
-
-
-## Usage
-
-- Hold LMB and drag to place walls
-- Hold LMB and drag on walls to erase them
-- S + LMB to place starting cell
-- E + LMB to place ending cell
-- Space to start the visualization
-- Other control options are on Imgui menu
 
 
 ## AI Policy
