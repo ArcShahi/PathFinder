@@ -7,7 +7,7 @@ A* , Dijkstra pathfinder alogrithm visualization written in C++ using `raylib`, 
 
 ## Features
 - Visualize A* and Dijkstra 
-- Compare A* and Dijstra
+- Compare A* and Dijkstra
 - ImGuI menu to control visuals and algorithm mechanics.
 - Menu also has info about : Nodes visisted, Time taken.
 - Abstract class to handle more pathfinder algorithms : BFS , DFS
